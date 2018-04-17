@@ -6,5 +6,14 @@
 <h1>THE CHIEF IS THE ONLY ONE THAT CREATES AND DELETS USERS</h1>
 
     <p>Welcome to {{user.username}}</p>
+    <div>
+        {{#each allUsers}}
+            <div>
+                Usuario: {{this.username}}
+                <a href="/pass/delete/{{this._id}}">Eliminar Usuario</a>
+            </div>
+        {{/each}}
+    </div>
+    <br>
     <a class="btn btn-success" href="/pass/createUsers" role="button">Create Users</a>
-<a class="btn btn-danger" href="/" role="button">Back to Home</a>
+    <a class="btn btn-danger" href="/" role="button">Back to Home</a>

@@ -1,5 +1,6 @@
 const express = require('express');
 const router  = express.Router();
+const User = require('../models/User');
 const logged = require('../middlewares/logged');
 const admin = require('../middlewares/admin');
 
@@ -9,7 +10,19 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/specialpage', [logged('/pass/login'), admin('/')], (req, res, next) => {
-  res.render('specialpage',{user:req.user});
+  User.find()
+    .then((users) => {
+      console.log('Then de búsqueda de usuarios')
+      console.log(users);
+      res.render('specialpage', {
+        user:req.user,
+        allUsers: users,
+      });
+    })
+    .catch((error) => {
+      console.log('Error buscando usuarios')
+      next(error);
+    })
 });
 
 
